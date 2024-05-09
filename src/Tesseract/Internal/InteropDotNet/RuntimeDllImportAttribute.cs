@@ -8,7 +8,7 @@ namespace InteropDotNet
 {
     [ComVisible(true)]
     [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
-    sealed class RuntimeDllImportAttribute : Attribute
+    internal sealed class RuntimeDllImportAttribute : Attribute
     {
         public string EntryPoint;
 
@@ -24,9 +24,5 @@ namespace InteropDotNet
 
         public string LibraryFileName { get; private set; }
 
-        public RuntimeDllImportAttribute(string libraryFileName)
-        {
-            LibraryFileName = libraryFileName;
-        }
     }
 }
