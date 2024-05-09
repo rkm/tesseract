@@ -1,9 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
-	  <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
 	  <RootNamespace>Tesseract.Tests</RootNamespace>
   </PropertyGroup>
 
@@ -45,7 +44,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Tesseract.Drawing\Tesseract.Drawing.csproj" />
     <ProjectReference Include="..\Tesseract\Tesseract.csproj" />
   </ItemGroup>
 
