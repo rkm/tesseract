@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using Tesseract.Internal;
+using Tesseract.Interop;
 
 namespace Tesseract
 {
@@ -22,7 +23,7 @@ namespace Tesseract
 		/// <returns></returns>
 		public static PixArray LoadMultiPageTiffFromFile(string filename)
 		{			
-			var	pixaHandle = Interop.LeptonicaApi.Native.pixaReadMultipageTiff( filename );
+			var	pixaHandle = LeptonicaApiSignatures.pixaReadMultipageTiff( filename );
 			if(pixaHandle == IntPtr.Zero)
 			{
 				throw new IOException(String.Format("Failed to load image '{0}'.", filename));
@@ -33,7 +34,7 @@ namespace Tesseract
 
         public static PixArray Create(int n)
         {
-            var pixaHandle = Interop.LeptonicaApi.Native.pixaCreate(n);
+            var pixaHandle = LeptonicaApiSignatures.pixaCreate(n);
             if (pixaHandle == IntPtr.Zero)
             {
                 throw new IOException("Failed to create PixArray");
@@ -181,7 +182,7 @@ namespace Tesseract
 			version = 1;
 			
 			// These will need to be updated whenever the PixA structure changes (i.e. a Pix is added or removed) though at the moment that isn't a problem.
-			_count = Interop.LeptonicaApi.Native.pixaGetCount(_handle);
+			_count = LeptonicaApiSignatures.pixaGetCount(_handle);
 		}
 		
 		#endregion
@@ -219,10 +220,10 @@ namespace Tesseract
             Guard.Require("copyflag", copyflag == PixArrayAccessType.Clone || copyflag == PixArrayAccessType.Copy,
                 "Copy flag must be either copy or clone but was {0}.", copyflag);
 
-            int result = Interop.LeptonicaApi.Native.pixaAddPix(_handle, pix.Handle, copyflag);
+            int result = LeptonicaApiSignatures.pixaAddPix(_handle, pix.Handle, copyflag);
             if (result == 0)
             {
-                _count = Interop.LeptonicaApi.Native.pixaGetCount(_handle);
+                _count = LeptonicaApiSignatures.pixaGetCount(_handle);
             }
             return result == 0;
         }
@@ -242,9 +243,9 @@ namespace Tesseract
             Guard.Require("index", index >= 0 && index < Count, "The index {0} must be between 0 and {1}.", index, Count);
 
             VerifyNotDisposed();
-            if(Interop.LeptonicaApi.Native.pixaRemovePix(_handle, index) == 0)
+            if(LeptonicaApiSignatures.pixaRemovePix(_handle, index) == 0)
             {
-                _count = Interop.LeptonicaApi.Native.pixaGetCount(_handle);
+                _count = LeptonicaApiSignatures.pixaGetCount(_handle);
             }
         }
 
@@ -254,9 +255,9 @@ namespace Tesseract
         public void Clear()
         {
             VerifyNotDisposed();
-            if (Interop.LeptonicaApi.Native.pixaClear(_handle) == 0)
+            if (LeptonicaApiSignatures.pixaClear(_handle) == 0)
             {
-                _count = Interop.LeptonicaApi.Native.pixaGetCount(_handle);
+                _count = LeptonicaApiSignatures.pixaGetCount(_handle);
             }
         }
 
@@ -273,7 +274,7 @@ namespace Tesseract
 			
 			VerifyNotDisposed();
 			
-			var pixHandle = Interop.LeptonicaApi.Native.pixaGetPix(_handle, index, accessType);
+			var pixHandle = LeptonicaApiSignatures.pixaGetPix(_handle, index, accessType);
 			if(pixHandle == IntPtr.Zero) {
 				throw new InvalidOperationException(String.Format("Failed to retrieve pix {0}.", pixHandle));
 			}
@@ -304,7 +305,7 @@ namespace Tesseract
 		protected override void Dispose(bool disposing)
 		{
 			IntPtr handle = _handle.Handle;
-			Interop.LeptonicaApi.Native.pixaDestroy(ref handle);
+			LeptonicaApiSignatures.pixaDestroy(ref handle);
 			_handle = new HandleRef(this, handle);
 		}
 		

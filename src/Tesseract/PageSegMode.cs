@@ -65,6 +65,8 @@ namespace Tesseract
         SingleChar = 10,
 
         /// <summary>
+        /// Sparse text
+        /// </summary>
         SparseText = 11,
 
         /// <summary>

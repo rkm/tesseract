@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using Tesseract.Interop;
 
 namespace Tesseract
 {
@@ -24,7 +25,7 @@ namespace Tesseract
             VerifyNotDisposed();
             if (_handleRef.Handle == IntPtr.Zero)
                 return false;
-            return Interop.TessApi.Native.ChoiceIteratorNext(_handleRef) != 0;
+            return ITessApiSignatures.ChoiceIteratorNext(_handleRef) != 0;
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace Tesseract
             if (_handleRef.Handle == IntPtr.Zero)
                 return 0f;
 
-            return Interop.TessApi.Native.ChoiceIteratorGetConfidence(_handleRef);
+            return ITessApiSignatures.ChoiceIteratorGetConfidence(_handleRef);
         }
 
         /// <summary>
@@ -60,7 +61,7 @@ namespace Tesseract
         {
             if (_handleRef.Handle != IntPtr.Zero)
             {
-                Interop.TessApi.Native.ChoiceIteratorDelete(_handleRef);
+                ITessApiSignatures.ChoiceIteratorDelete(_handleRef);
             }
         }
     }

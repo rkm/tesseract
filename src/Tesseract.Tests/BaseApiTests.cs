@@ -1,6 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Diagnostics;
 
 namespace Tesseract.Tests
 {

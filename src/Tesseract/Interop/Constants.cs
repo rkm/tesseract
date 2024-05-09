@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Tesseract.Interop
+﻿namespace Tesseract.Interop
 {
     /// <summary>
     /// Description of Constants.
