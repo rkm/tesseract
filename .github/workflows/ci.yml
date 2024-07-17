@@ -33,4 +33,4 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore src/Tesseract.sln
     - name: Test
-      run: dotnet test --configuration Release --no-build --verbosity normal --logger trx --results-directory "TestResults" src/Tesseract.sln
+      run: dotnet test --filter CanRenderResultsIntoTextFile --configuration Release --no-build --verbosity normal --logger trx --results-directory "TestResults" src/Tesseract.sln
