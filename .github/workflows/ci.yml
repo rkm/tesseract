@@ -2,12 +2,8 @@ me: CI
 
 on:
   push:
-    branches: [ 'macos-fix' ]
   pull_request:
-    branches: [ 'main', 'develop' ]
-    paths:
-    - '**.cs'
-    - '**.csproj'
+  workflow_dispatch:
 
 env:
   DOTNET_NOLOGO: true
